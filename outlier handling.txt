@@ -1,0 +1,61 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
+
+Sample DataFrame
+# Sample DataFrame
+data = {'column1': [1, 2, 3, 4, 100, 6, 7, 8, 9, 200], 'column2': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
+df = pd.DataFrame(data)
+print("Original DataFrame:\n", df)
+
+Visualization to Detect Outliers
+Box Plot
+sns.boxplot(x=df['column1'])
+plt.title("Box Plot of column1")
+plt.show()
+
+Scatter Plot
+sns.scatterplot(x='column1', y='column2', data=df)
+plt.title("Scatter Plot of column1 vs column2")
+plt.show()
+
+Statistical Methods to Detect Outliers
+Z-Score
+z_scores = stats.zscore(df['column1'])
+outliers_z = df[(z_scores > 3) | (z_scores < -3)]
+print("Outliers detected using Z-Score:\n", outliers_z)
+
+
+IQR (Interquartile Range)
+Q1 = df['column1'].quantile(0.25)
+Q3 = df['column1'].quantile(0.75)
+IQR = Q3 - Q1
+outliers_iqr = df[(df['column1'] < Q1 - 1.5 * IQR) | (df['column1'] > Q3 + 1.5 * IQR)]
+print("Outliers detected using IQR:\n", outliers_iqr)
+
+
+Handling Outliers
+1. Removing Outliers
+df_no_outliers = df[~((df['column1'] < Q1 - 1.5 * IQR) | (df['column1'] > Q3 + 1.5 * IQR))]
+print("DataFrame after removing outliers:\n", df_no_outliers)
+
+
+2. Imputing Outliers
+median = df['column1'].median()
+df_imputed = df.copy()
+df_imputed['column1'] = np.where((df_imputed['column1'] < Q1 - 1.5 * IQR) | (df_imputed['column1'] > Q3 + 1.5 * IQR), median, df_imputed['column1'])
+print("DataFrame after imputing outliers:\n", df_imputed)
+
+3. Transforming Outliers
+Log Transformation
+df_transformed_log = df.copy()
+df_transformed_log['column1'] = np.log(df_transformed_log['column1'] + 1)  # Adding 1 to avoid log(0)
+print("DataFrame after log transformation:\n", df_transformed_log)
+
+Square Root Transformation
+df_transformed_sqrt = df.copy()
+df_transformed_sqrt['column1'] = np.sqrt(df_transformed_sqrt['column1'])
+print("DataFrame after square root transformation:\n", df_transformed_sqrt)
+

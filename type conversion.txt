@@ -1,0 +1,50 @@
+Using Pandas for Type Conversion:
+
+Example: Convert a Single Column
+
+import pandas as pd
+
+# Sample DataFrame
+data = {'column1': ['1', '2', '3'], 'column2': [4, 5, 6]}
+df = pd.DataFrame(data)
+
+# Convert 'column1' to integer
+df['column1'] = df['column1'].astype(int)
+
+print(df.dtypes)
+
+
+Example: Convert Multiple Columns
+
+# Convert multiple columns
+df = df.astype({'column1': 'int', 'column2': 'float'})
+
+print(df.dtypes)
+
+2. Using pd.to_numeric() for Numeric Conversion
+
+# Convert 'column1' to numeric (int or float)
+df['column1'] = pd.to_numeric(df['column1'])
+
+print(df.dtypes)
+
+
+You can also use the errors parameter to handle errors during conversion:
+
+# Convert with error handling
+df['column1'] = pd.to_numeric(df['column1'], errors='coerce')  # Invalid parsing will be set as NaN
+
+print(df)
+
+
+3. Using pd.to_datetime() for Date/Time Conversion
+# Sample DataFrame with date strings
+data = {'date': ['2023-01-01', '2023-01-02', '2023-01-03']}
+df = pd.DataFrame(data)
+
+# Convert 'date' to datetime
+df['date'] = pd.to_datetime(df['date'])
+
+print(df.dtypes)
+
+

@@ -1,0 +1,24 @@
+import pandas as pd
+
+# Sample DataFrame
+data = {'column1': [1, 2, 3], 'column2': [4, 5, 6]}
+df = pd.DataFrame(data)
+
+# Convert DataFrame to CSV
+df.to_csv('filename.csv', index=False)
+
+Explanation
+
+Import pandas: Ensure you have imported the pandas library.
+import pandas as pd
+
+Create or load a DataFrame: You can create a DataFrame from a dictionary, list, or any other data structure. 
+Alternatively, you can load it from another source like a CSV, Excel file, etc.
+
+data = {'column1': [1, 2, 3], 'column2': [4, 5, 6]}
+df = pd.DataFrame(data)
+
+Convert to CSV: Use the to_csv method on the DataFrame.
+
+df.to_csv('filename.csv', index=False)
+

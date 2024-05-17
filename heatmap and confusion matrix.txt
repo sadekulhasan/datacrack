@@ -1,0 +1,39 @@
+1. Heatmap
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load your data into a DataFrame
+df = pd.read_csv('your_file.csv')
+
+# Generate a heatmap
+plt.figure(figsize=(10, 8))
+sns.heatmap(df, annot=True, cmap='viridis')
+plt.title('Heatmap of DataFrame')
+plt.show()
+
+
+2. Confusion Matrix
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.metrics import confusion_matrix
+
+# Assume you have actual and predicted labels in your DataFrame
+# For example, 'actual' and 'predicted' columns
+df = pd.read_csv('your_file.csv')
+actual = df['actual']
+predicted = df['predicted']
+
+# Generate the confusion matrix
+cm = confusion_matrix(actual, predicted)
+
+# Create a heatmap for the confusion matrix
+plt.figure(figsize=(8, 6))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=actual.unique(), yticklabels=actual.unique())
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+plt.title('Confusion Matrix')
+plt.show()
+
+
